@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Rotation</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .connection {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+        }
+        .computer {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .arrows {
+            display: flex;
+            flex-direction: column;
+            margin: 0 10px;
+        }
+        .arrow {
+            width: 40px;
+            height: 2px;
+            background-color: #333;
+            position: relative;
+            margin: 5px 0;
+        }
+        .arrow.right::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #333;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        .arrow.left::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-right: 10px solid #333;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for conn in campus_data %}
+        <div class="connection">
+            <div class="computer">{{ conn.campus }}</div>
+            <div class="arrows">
+                <div class="arrow right"></div>
+                <div class="arrow left"></div>
+            </div>
+            <div class="computer">{{ conn.next_campus }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <h2>Connection String:</h2>
+        <p>{{ connections_str }}</p>
+    </div>
+</body>
+</html>
